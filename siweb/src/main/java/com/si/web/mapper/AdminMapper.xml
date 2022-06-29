@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.si.web.mapper.AdminMapper">
+	<!-- 유저 리스트 -->
+	<select id="selectUserList" parameterType="Map" resultType="com.si.web.vo.User">
+		SELECT 
+			user_id userId,
+			user_email userEmail,
+			user_birth userBirth,
+			user_lv userLv,
+			user_status userStatus,
+			create_date createDate,
+			update_date updateDate
+		FROM user
+		ORDER BY create_date, user_lv DESC
+		LIMIT #{beginRow}, #{ROW_PER_PAGE}
+	</select>
+	
+	<!-- 계정 수 -->
+	<select id="selectUserCount" resultType="int">
+		SELECT COUNT(*)
+		FROM user
+	</select>
+	
+	<!-- 유저 삭제 -->
+	<update id="deleteUser" parameterType="com.si.web.vo.User">
+		UPDATE user SET
+			user_status = 1,
+			update_date = NOW()
+		WHERE user_id = #{userId}
+	</update>
+	
+	<!-- 권한 변경 -->
+	<update id="updateLv" parameterType="com.si.web.vo.User">
+		UPDATE user SET
+			user_lv = #{userLv},
+			update_date = NOW()
+		WHERE user_id = #{userId}
+	</update>
+</mapper>
