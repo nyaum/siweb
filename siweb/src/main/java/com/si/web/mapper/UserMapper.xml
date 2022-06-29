@@ -26,7 +26,9 @@
 	<!-- 로그인 -->
 	<select id="loginUser" parameterType="com.si.web.vo.User" resultType="com.si.web.vo.User">
 		SELECT 
-			user_id userId
+			user_id userId,
+			user_lv userLv,
+			user_status userStatus
 		FROM user
 		WHERE user_id = #{userId} AND user_pwd = password(#{userPwd}) 
 	</select>

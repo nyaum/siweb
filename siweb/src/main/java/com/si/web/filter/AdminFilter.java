@@ -21,6 +21,7 @@ public class AdminFilter implements Filter {
 		System.out.println("AdminFilter 실행");
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		System.out.println(session.getAttribute("loginUserId") + " session확인");
+		System.out.println(session.getAttribute("loginUserLv") + " session확인");
 		
 		if(session.getAttribute("loginUserId") == null) {
 			System.out.println("강제이동 : 세션값 없음");

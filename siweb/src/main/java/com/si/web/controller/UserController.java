@@ -75,9 +75,19 @@ public class UserController {
 		
 		session.setAttribute("loginUserId", loginUser.getUserId());
 		session.setAttribute("loginUserLv", loginUser.getUserLv());
+		session.setAttribute("loginUserStatus", loginUser.getUserStatus());
 		
-		System.out.println(session.getAttribute("loginUserId") + "<<< Id");
-		System.out.println(session.getAttribute("loginUserLv") + "<<< Lv");
+		System.out.println(session.getAttribute("loginUserId") + " <<< Id");
+		System.out.println(session.getAttribute("loginUserLv") + " <<< Lv");
+		System.out.println(session.getAttribute("loginUserStatus") + " <<< Status");
+		
+		// 탈퇴 처리 된 계정일 경우
+		if(session.getAttribute("loginUserStatus").equals(1)) {
+			
+			session.invalidate();
+			
+			return "redirect:/login";
+		}
 		
 		return "redirect:/index";
 	}
